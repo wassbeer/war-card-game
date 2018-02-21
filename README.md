@@ -114,8 +114,8 @@ _3rd iteration all remains the same_
 
 ### Reference
 
-[Single responsibility principle](https://en.wikipedia.org/wiki/Single_responsibility_principle)
-[The Kunth-Fisher-Yates Algorithm](http://www.i-programmer.info/programming/theory/2744-how-not-to-shuffle-the-kunth-fisher-yates-algorithm.html)
-[War Card Game  Algorithm](https://u.osu.edu/fe1181au17sec6689j/files/2016/10/War-Final-Algorithm-rumt5g.pdf)
-[How Python Random Shuffle Works](https://softwareengineering.stackexchange.com/questions/215737/how-python-random-shuffle-works)
-[How to Swap Two Variables in JavaScript](https://stackoverflow.com/questions/16201656/how-to-swap-two-variables-in-javascript)
+* [Single responsibility principle](https://en.wikipedia.org/wiki/Single_responsibility_principle)
+* [The Kunth-Fisher-Yates Algorithm](http://www.i-programmer.info/programming/theory/2744-how-not-to-shuffle-the-kunth-fisher-yates-algorithm.html)
+* [War Card Game  Algorithm](https://u.osu.edu/fe1181au17sec6689j/files/2016/10/War-Final-Algorithm-rumt5g.pdf)
+* [How Python Random Shuffle Works](https://softwareengineering.stackexchange.com/questions/215737/how-python-random-shuffle-works)
+* [How to Swap Two Variables in JavaScript](https://stackoverflow.com/questions/16201656/how-to-swap-two-variables-in-javascript)
