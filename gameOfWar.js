@@ -47,25 +47,26 @@ function distribute(numberOfPlayers, deck) {
         deck.splice(0, 1);
     };
     const handLength = deck.length / numberOfPlayers;
+    let strt = -handLength;
     // distribute deck among players
     for (let i = 0; i < numberOfPlayers; i++) {
-        const hand = deck.slice(0, handLength - 1);
+        strt += handLength;
+        const hand = deck.slice(strt, strt + handLength);
         // asign the player value to the card
         for (const card in hand) {
             hand[card].player = i + 1;
         }
         players.push(new Player(i + 1, hand));
-        deck.splice(0, handLength - 1);
     }
 }
 
 /* 5. Create a function playRound() */
 
-function playRound(players, rematchStack) {
+function playRound(players, secondRoundStack) {
     const cardsOnTable = new Array(),
         loserCards = new Array(),
         rematchPlayers = new Array();
-    let lastCardFrequency = 0;
+        let lastCardFrequency = 0;
 
     // throw cards on table
     players.forEach((player) => {
@@ -87,7 +88,7 @@ function playRound(players, rematchStack) {
 
     // single or multiple losers
     switch (true) {
-    	// multiple losers
+        // multiple losers
         case (loserCards.length > 1):
             players.forEach((player) => {
                 loserCards.forEach((loserCard) => {
@@ -103,28 +104,29 @@ function playRound(players, rematchStack) {
                     }
                 });
             });
-            // if multiple players have no card left and reuse cards
+            // if multiple players have no card left so reuse cards
             if (lastCardFrequency === rematchPlayers.length) {
                 return console.log('It is a tie'),
                     console.log(players);
             }
             // rematch
-            rematchStack = loserCards;
+            const rematchStack = cardsOnTable;
             playRound(rematchPlayers, rematchStack);
             break;
 
         // single loser
         default:
+            const stack = cardsOnTable.concat(secondRoundStack);
+                let loser;
             players.forEach((player) => {
                 if (loserCards[0].player === player.player) {
-                    const loser = player,
-                        stack = cardsOnTable.concat(rematchStack);
-                    stack.forEach((card) => {
-                        card.player = loserCards[0].player;
-                        loser.hand.unshift(card);
-                    }); // empty rematchStack array
-                    return rematchStack = new Array();
+                    loser = player;
                 }
+            });
+            // return tagged stack for loser
+            return stack.forEach((card) => {
+                card.player = loserCards[0].player;
+                loser.hand.unshift(card);
             });
             break;
     }
@@ -134,7 +136,7 @@ function playRound(players, rematchStack) {
 
 function blindGame(players) {
     const winners = new Array(),
-    rematchStack = new Array();
+        rematchStack = new Array();
     let winner = false;
     while (!winner) {
         const amounts = new Array();
