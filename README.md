@@ -48,39 +48,26 @@ Assessment for 216, coding a war card game algorithm
 
 ### The war game
 
-5. Create a function roundResult()
-5.1 the function takes in the cardsOnTable
-5.1 Options of the round
-5.1.1 One card is higher than the other(s)
-5.1.2 The highest cards tie 
-5.1.2.1 Determine the highest cards 
-5.1.2.2 Push the highest cards to the remiseArray 
-5.2.2.3 Call the roundResult function with remiseArray as argument
-5.2 reassigning the player number to the player key of card the lost player receives
-5.3 push the cards to the BOTTOM of the stack of the player who has lost his/her array
+5. Create a function playRound()
+5.1 the function takes in the players and the rematchStack
+5.2 create arrays cardsOnTable and loserCards;
+5.3 throw cards on table
+5.4 determine the highest card(s)
+5.4.1 one loser
+5.4.1.1 reassign the player number to the player key of card the lost player receives in stack
+5.4.1.2 push the cards to the BOTTOM of the cards of the particular player who has lost his/her array
+5.5 multiple losers
+5.5.2 Push the highest cards to the rematchStach 
+5.5.3 Push the losing players to the rematchPlayers array
+5.5.3 Call the roundResult function with rematchStach as argument
 
 6. Simulate a blind game
-6.1 Create a variable cardsOnTable that will contain the thrown cards
+6.1 Declare variables noWinner (boolean) and winners(array); 
 6.2 Create a while loop looping while all players have more than 0 cards
-6.2.1 submit the cards
-6.2.1.1 take the top card of each player the deck, POP it from the player card array, and PUSH it to the cards on table
-6.2.2 roundResult()
+6.2.2 call playRound()
 6.3 determine the winner 
 6.3.1 determine which players' array.length equals 0
-6.3.2 log the winner
-
-7. Simulate a strategy card game
-7.1 Determine the starting player
-7.1.2 use the random function
-7.3.1 Example strategy 1: throw anything lower than which is on the table
-7.3.2 Example strategy 2: when there is a 2,3 or 5 on the table, play higher, when higher play lower
-7.4 Create a variable cardsOnTable that will contain the thrown cards
-7.5 Create a while loop looping while all players have more than 0 cards
-7.6 Submit the cards according to the strategy
-7.7 roundResult()
-7.8 determine the winner 
-7.8.1 determine which players' array.length equals 0
-7.8.2 log the winner
+6.3.2 log the winner(s)
 
 ### Background info: Fisher Yates Shuffle 
 
@@ -112,6 +99,12 @@ ABC -->	ABC <!-- No change -->
 
 _3rd iteration all remains the same_
 
+### for...in vs. for(let i = 0; i < n; i++) vs. forEach()
+
+_"Because the order of iteration is implementation-dependent, iterating over an array may not visit elements in a consistent order. Therefore it is better to use a for loop with a numeric index (or Array.prototype.forEach() or the for...of loop) when iterating over arrays where the order of access is important." -MDN_
+
+The "for...in" statement is used when the order of iteration is not important. For loops are used when the order of iteration is important, for instance in the shuffle() function, or when the object has no properties yet.
+
 ### Reference
 
 * [Single responsibility principle](https://en.wikipedia.org/wiki/Single_responsibility_principle)
@@ -119,3 +112,4 @@ _3rd iteration all remains the same_
 * [War Card Game  Algorithm](https://u.osu.edu/fe1181au17sec6689j/files/2016/10/War-Final-Algorithm-rumt5g.pdf)
 * [How Python Random Shuffle Works](https://softwareengineering.stackexchange.com/questions/215737/how-python-random-shuffle-works)
 * [How to Swap Two Variables in JavaScript](https://stackoverflow.com/questions/16201656/how-to-swap-two-variables-in-javascript)
+* [for...in](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in)

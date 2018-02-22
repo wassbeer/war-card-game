@@ -1,7 +1,7 @@
 /* 1. Create the card deck */
 
 const cardSorts = ['♦', '♣', '♥', '♠'],
-    cardWeights = [2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40, 50], // 20 = B, 30 = V, 40 = K, 50 = A
+    cardWeights = [2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40, 50], // 20 = P, 30 = L, 40 = K, 50 = A
     deck = new Array();
 
 function Card(sort, weight, player) {
@@ -21,7 +21,7 @@ function createDeck(sorts, weights) {
 /* 2. Create a random function */
 
 function rndm(index, deck) {
-    return Math.floor(Math.random() * (deck.length - index) + index - 1);
+    return Math.floor(Math.random() * (deck.length - index) + index);
 }
 
 /* 3. Create card shuffle function */
@@ -37,8 +37,8 @@ function shuffle(deck) {
 
 const players = new Array();
 
-function Player(number, hand) {
-    this.number = number,
+function Player(player, hand) {
+    this.player = player,
         this.hand = hand;
 }
 
@@ -48,12 +48,12 @@ function distribute(numberOfPlayers, deck) {
     };
     const handLength = deck.length / numberOfPlayers;
     for (let i = 0; i < numberOfPlayers; i++) { // distribute deck among players
-        const hand = deck.slice(0, handLength);
+        const hand = deck.slice(0, handLength - 1);
         for (const card in hand) { // asign the player value to the card
             hand[card].player = i + 1;
         }
         players.push(new Player(i + 1, hand));
-        deck.splice(0, handLength);
+        deck.splice(0, handLength - 1);
     }
 }
 
