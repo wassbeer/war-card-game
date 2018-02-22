@@ -20,7 +20,7 @@ Assessment for 216, coding a war card game algorithm
 ### The shuffle
 
 2. Create a random function --> See reference on what is random
-2.1 the function takes in the paramterers deck and the index
+2.1 the function takes in the parameters deck and the index
 2.2 the function returns a random number between the index and the length of the deck - 1
 2.3 Use Math.floor() and Math.random()
 
@@ -40,11 +40,11 @@ Assessment for 216, coding a war card game algorithm
 4.3.2 key hand
 4.4 Create distribute function
 4.4.1 Taking in the n of players and deck
-4.4.2 The index should equal a number that is divisable to 1 by the n players (%)
+4.4.2 The index should equal a number that is divisible to 1 by the n players (%)
 4.4.3 the cards should be tagged with the number of the player
-4.5 For each player (playerNumber), asign the hand and number
+4.5 For each player (playerNumber), assign the hand and number
 4.6.1 Use slice array to assign the cards to the players
-4.6.2 Use splice to delete te assigned part
+4.6.2 Use splice to delete the assigned part
 
 ### The war game
 
@@ -59,7 +59,10 @@ Assessment for 216, coding a war card game algorithm
 5.5 multiple losers
 5.5.2 Push the highest cards to the rematchStach 
 5.5.3 Push the losing players to the rematchPlayers array
-5.5.3 Call the roundResult function with rematchStach as argument
+5.5.4 Take care of special cases
+5.5.4.1 One player has no cards left
+5.5.4.2 Multiple players played their last card
+5.5.3 Call the playRound function with rematchStach as argument
 
 6. Simulate a blind game
 6.1 Declare variables noWinner (boolean) and winners(array); 
@@ -95,7 +98,7 @@ CBA --> CAB <!-- Swap B with A -->
 CBA --> CBA <!-- No change -->
 
 ABC --> ACB <!-- Swap B with C -->
-ABC -->	ABC <!-- No change -->
+ABC --> ABC <!-- No change -->
 
 _3rd iteration all remains the same_
 
@@ -113,3 +116,4 @@ The "for...in" statement is used when the order of iteration is not important. F
 * [How Python Random Shuffle Works](https://softwareengineering.stackexchange.com/questions/215737/how-python-random-shuffle-works)
 * [How to Swap Two Variables in JavaScript](https://stackoverflow.com/questions/16201656/how-to-swap-two-variables-in-javascript)
 * [for...in](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in)
+

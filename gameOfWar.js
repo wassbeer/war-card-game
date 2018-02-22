@@ -1,7 +1,7 @@
 /* 1. Create the card deck */
 
-const cardSorts = ['♦', '♣', '♥', '♠'],
-    cardWeights = [2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40, 50], // 20 = P, 30 = L, 40 = K, 50 = A
+const cardSorts = ['♦', '♣', '♥', '♠'], // 20 = P, 30 = L, 40 = K, 50 = A
+    cardWeights = [2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40, 50],
     deck = new Array();
 
 function Card(sort, weight, player) {
@@ -47,9 +47,11 @@ function distribute(numberOfPlayers, deck) {
         deck.splice(0, 1);
     };
     const handLength = deck.length / numberOfPlayers;
-    for (let i = 0; i < numberOfPlayers; i++) { // distribute deck among players
+    // distribute deck among players
+    for (let i = 0; i < numberOfPlayers; i++) {
         const hand = deck.slice(0, handLength - 1);
-        for (const card in hand) { // asign the player value to the card
+        // asign the player value to the card
+        for (const card in hand) {
             hand[card].player = i + 1;
         }
         players.push(new Player(i + 1, hand));
@@ -57,9 +59,106 @@ function distribute(numberOfPlayers, deck) {
     }
 }
 
+/* 5. Create a function playRound() */
+
+function playRound(players, rematchStack) {
+    const cardsOnTable = new Array(),
+        loserCards = new Array(),
+        rematchPlayers = new Array();
+    let lastCardFrequency = 0;
+
+    // throw cards on table
+    players.forEach((player) => {
+        cardsOnTable.push(player.hand[0]);
+        player.hand.shift();
+    });
+
+    // determine the highest card
+    const highestCardWeight = Math.max(...cardsOnTable.map((o) => {
+        return o.weight;
+    }));
+
+    // define the loser(s)
+    cardsOnTable.forEach((card) => {
+        if (card.weight === highestCardWeight) {
+            loserCards.push(card);
+        }
+    });
+
+    // single or multiple losers
+    switch (true) {
+    	// multiple losers
+        case (loserCards.length > 1):
+            players.forEach((player) => {
+                loserCards.forEach((loserCard) => {
+                    // selecting the players with losing cards
+                    if (loserCard.player === player.player) {
+                        // if the player has no card left
+                        if (!player.hand.length) {
+                            lastCardFrequency++;
+                            // reuse the current card
+                            player.hand.push(loserCard);
+                        }
+                        rematchPlayers.push(player);
+                    }
+                });
+            });
+            // if multiple players have no card left and reuse cards
+            if (lastCardFrequency === rematchPlayers.length) {
+                return console.log('It is a tie'),
+                    console.log(players);
+            }
+            // rematch
+            rematchStack = loserCards;
+            playRound(rematchPlayers, rematchStack);
+            break;
+
+        // single loser
+        default:
+            players.forEach((player) => {
+                if (loserCards[0].player === player.player) {
+                    const loser = player,
+                        stack = cardsOnTable.concat(rematchStack);
+                    stack.forEach((card) => {
+                        card.player = loserCards[0].player;
+                        loser.hand.unshift(card);
+                    }); // empty rematchStack array
+                    return rematchStack = new Array();
+                }
+            });
+            break;
+    }
+}
+
+/* 6. Simulate a blind game */
+
+function blindGame(players) {
+    const winners = new Array(),
+    rematchStack = new Array();
+    let winner = false;
+    while (!winner) {
+        const amounts = new Array();
+        players.forEach((player) => {
+            amounts.push(player.hand.length);
+        });
+        if (amounts.indexOf(0) > -1) {
+            winner = true;
+            winners.push(amounts.indexOf(0)),
+                winners.forEach((index) => {
+                    console.log(players);
+                    console.log(`Player ${players[index].player} has won!`);
+                });
+            // new game
+            return winner = false;
+        }
+        playRound(players, rematchStack);
+    }
+}
+
 createDeck(cardSorts, cardWeights);
-console.log(deck);
+// console.log(deck);
 shuffle(deck);
-console.log(deck);
+// console.log(deck);
 distribute(4, deck);
-console.log(players[2]);
+// console.log(players[2]);
+blindGame(players);
