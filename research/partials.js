@@ -12,7 +12,7 @@
 //     highestCard = cardsSorted[cardsOnTable.length - 1]; // highest card
 //     console.log(highestCard)
 //     switch (cardsOnTable.indexOf(highestCard)) {
-//         case 1: // if single occurence of highest card 
+//         case 1: // if single occurence of highest card
 //             cardsOnTable.forEach((card) => { // reassigning the player number to the player key of card the lost player receives
 //                 card.player = cardsSorted[highestCard].player;
 //             })
